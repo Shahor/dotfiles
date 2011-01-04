@@ -1,0 +1,12 @@
+[alias]
+	st = status
+	co = checkout
+	ci = commit
+[user]
+	name = Shahor
+	email = shahor@shahor.fr
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
