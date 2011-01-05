@@ -2,6 +2,7 @@
 	st = status
 	co = checkout
 	ci = commit
+	br = branch
 [user]
 	name = Shahor
 	email = shahor@shahor.fr
