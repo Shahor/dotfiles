@@ -4,6 +4,7 @@
 	ci = commit
 	br = branch
 	l = log --all --graph
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 [user]
 	name = Shahor
 	email = shahor@shahor.fr
