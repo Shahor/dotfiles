@@ -28,7 +28,13 @@ parse_git_branch() {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 
-export PS1="\[\e[01;32m\]\u@\h \[\e[01;33m\]\W\`if [ \$? != 0 ]; then echo -e '\e[01;31m FAILED';fi\` \[\e[01;34m\]$\[\e[00m\] \$(parse_git_branch) "
+check_last_command() {
+	if [ $? != 0 ]; then
+		echo 'FAILED '
+	fi
+}
+
+export PS1="[\t] \[\e[01;32m\]\u@\h \[\e[01;33m\]\W \e[01;31m\$(check_last_command)\[\e[01;34m\]\[\e[00m\]\$(parse_git_branch) \$ "
 export EDITOR=vim
 export SVN_EDITOR=vim
 
