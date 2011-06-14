@@ -8,10 +8,10 @@ fi
 
 #local bashrc
 
-if [[ -f ~/.bash/.local_bashrc.sh ]]; then
-	source ~/.bash/.local_bashrc.sh
+if [[ -f ~/.bash/local_bashrc.sh ]]; then
+	source ~/.bash/local_bashrc.sh
 else
-	echo "~/.bash/.local_bashrc.sh does not exist"
+	echo "~/.bash/local_bashrc.sh does not exist"
 fi
 
 if [[ -f ~/.ssh/agent ]]; then

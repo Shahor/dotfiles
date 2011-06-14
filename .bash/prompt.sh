@@ -40,3 +40,5 @@ l1_start="$bold$hc\u$sc@$hc\H $dc\w $git\$(parse_git_branch)$reset"
 l1_end="$pc\D{%y-%m-%d %H:%M:%S}"
 
 export PS1="$err\$(check_last_command)$reset$n$l1_start $l1_end$n$l2"
+
+echo "Prompt.sh loaded"
