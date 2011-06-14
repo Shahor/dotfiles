@@ -62,7 +62,7 @@ if has("gui_running")
     set t_Co=256
     colorscheme darkblue
 else
-    colorscheme delroth-molokai
+    colorscheme delek
 endif
 
 set encoding=utf8
