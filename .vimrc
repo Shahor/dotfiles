@@ -121,3 +121,10 @@ map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Prevents LustyExplorer from whining when vim not compiled with ruby support
+let g:LustyExplorerSuppressRubyWarning = 1
