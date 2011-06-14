@@ -1,3 +1,4 @@
+"
 " Some parts of this .vimrc file come from http://amix.dk/vim/vimrc.html
 
 
@@ -10,6 +11,9 @@ set history=700
 " Enable filetype plugin
 filetype plugin on
 filetype indent on
+
+" Buffers
+:set hidden
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -54,11 +58,11 @@ set hlsearch " Highlights search things
 " => Colors and fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("gui_running")
-	set guioptions-=T
-	set t_Co=256
-	colorscheme darkblue
+    set guioptions-=T
+    set t_Co=256
+    colorscheme darkblue
 else
-	colorscheme delek
+    colorscheme delek
 endif
 
 set encoding=utf8
@@ -126,5 +130,12 @@ map <c-h> <c-w>h
 " => Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+if has("gui_running")
+else
+    call pathogen#runtime_append_all_bundles()
+end
 " Prevents LustyExplorer from whining when vim not compiled with ruby support
 let g:LustyExplorerSuppressRubyWarning = 1
+
+" Snipmate does need this
+filetype plugin on
