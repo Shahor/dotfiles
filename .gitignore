@@ -1,3 +1,4 @@
 .bash/local_bashrc.sh
 .vim/.netrwhist
 .vim/bundle/*
+*.swp
