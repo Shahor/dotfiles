@@ -18,12 +18,16 @@ if [[ -f ~/.ssh/agent ]]; then
 	source ~/.ssh/agent
 fi
 
+if [[ -f ~/.git_completion ]]; then
+	source ~/.git_completion
+fi
+
 # Prompt section
 if [[ -f ~/.bash/prompt.sh ]]; then
 	source ~/.bash/prompt.sh
 else
 	echo "~/.bash/prompt.sh does not exist, using default prompt"
-	export PS1="[\t] \[\e[01;32m\]\u@\h \[\e[01;33m\]\W \e[01;31m\$(check_last_command)\[\e[01;34m\]\[\e[00m\]\$(parse_git_branch) \$ " #default prompt
+	export PS1="[\t] \[\e[01;32m\]\u@\h \[\e[01;33m\]\W \[\e[01;34m\]\[\e[00m\] \$ " #default prompt
 fi
 # end prompt section
 

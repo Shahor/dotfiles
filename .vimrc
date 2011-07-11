@@ -128,11 +128,8 @@ map <c-h> <c-w>h
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call pathogen#runtime_append_all_bundles()
 
-if has("gui_running")
-else
-    call pathogen#runtime_append_all_bundles()
-end
 " Prevents LustyExplorer from whining when vim not compiled with ruby support
 let g:LustyExplorerSuppressRubyWarning = 1
 
