@@ -62,7 +62,7 @@ if has("gui_running")
 endif
 
 set t_Co=256 " On MAC OS one must use iTerm2 in order to be able to use 256 colors. Terminal.app just doesn't handle it
-colorscheme delroth-molokai
+colorscheme shahor-molokai
 
 set encoding=utf8
 
