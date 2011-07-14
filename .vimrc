@@ -59,11 +59,10 @@ set hlsearch " Highlights search things
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("gui_running")
     set guioptions-=T
-    set t_Co=256
-    colorscheme darkblue
-else
-    colorscheme delek
 endif
+
+set t_Co=256 " On MAC OS one must use iTerm2 in order to be able to use 256 colors. Terminal.app just doesn't handle it
+colorscheme shahor-molokai
 
 set encoding=utf8
 

@@ -18,6 +18,10 @@ if [[ -f ~/.ssh/agent ]]; then
 	source ~/.ssh/agent
 fi
 
+if [[ -f ~/.git_completion ]]; then
+	source ~/.git_completion
+fi
+
 # Prompt section
 if [[ -f ~/.bash/prompt.sh ]]; then
 	source ~/.bash/prompt.sh
