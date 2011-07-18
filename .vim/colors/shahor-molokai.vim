@@ -2,6 +2,7 @@
 "
 " Author: Tomas Restrepo <tomas@winterdom.com>
 " Author: Pierre Bourdon <delroth@gmail.com> (modifications)
+" Author: Shahor <shahor@shahor.fr> (modifications)
 "
 " Note: Based on the monokai theme for textmate
 " by Wimer Hazenberg and its darker variant 
@@ -19,7 +20,7 @@ if version > 580
         syntax reset
     endif
 endif
-let g:colors_name="delroth-molokai"
+let g:colors_name="shahor-molokai"
 
 if &t_Co > 255
    hi Boolean         ctermfg=135
