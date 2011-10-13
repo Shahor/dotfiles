@@ -9,6 +9,7 @@ end
 git_bundles = [
 	"git://github.com/msanders/snipmate.vim.git",
 	"git://github.com/scrooloose/nerdtree.git",
+	"git://github.com/Raimondi/delimitMate.git"
 ]
 
 vim_org_scripts = [
