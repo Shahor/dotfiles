@@ -26,6 +26,9 @@ let g:mapleader = ","
 " Fast saving
 nmap <leader>w :w!<cr>
 
+" Buffers listing
+nmap <leader>l :ls<cr>
+
 " Fast editing of the .vimrc
 map <leader>e :e! ~/.vim_runtime/vimrc<cr>
 
