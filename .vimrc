@@ -1,6 +1,16 @@
-"
 " Some parts of this .vimrc file come from http://amix.dk/vim/vimrc.html
+" others from this awesome post : http://stevelosh.com/blog/2010/09/coming-home-to-vim/
+" 	(his .vimrc here : https://bitbucket.org/sjl/dotfiles/src/tip/vim/.vimrc)
 
+" Preamble ----------------------------------------------------------------
+" {{{
+
+filetype off
+call pathogen#runtime_append_all_bundles()
+filetype plugin indent on
+set nocompatible
+
+" }}}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -8,12 +18,8 @@
 " Sets how many lines of history VIM has to remember
 set history=700
 
-" Enable filetype plugin
-filetype plugin on
-filetype indent on
-
 " Buffers
-:set hidden
+set hidden
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -30,7 +36,7 @@ nmap <leader>w :w!<cr>
 nmap <leader>l :ls<cr>
 
 " Fast editing of the .vimrc
-map <leader>e :e! ~/.vim_runtime/vimrc<cr>
+map <leader>e :e! $MYVIMRC<cr>
 
 " When vimrc is edited, reload it
 autocmd! bufwritepost vimrc source ~/.vim_runtime/vimrc
@@ -39,17 +45,36 @@ autocmd! bufwritepost vimrc source ~/.vim_runtime/vimrc
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" removing use of arrow keys
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+nnoremap j gj
+nnoremap k gk
+
+set ttyfast
+
 " Terminal title is actual opened file name
 set title
+
 " colors
 syntax on
+
 " cursor position info
 set ruler
+
+" 85 column marker
+set colorcolumn=85
 
 " case insensitive search
 set ignorecase
 set smartcase
-"
+
 " Smart autocompletion on file opening (using :e per exemple)
 set wildmode=longest,list
 
@@ -57,6 +82,7 @@ set wildmode=longest,list
 set incsearch
 set hlsearch " Highlights search things
 
+" removes all the vi compatibility
 set nocompatible
 
 " Smarter status line
@@ -113,7 +139,6 @@ colorscheme shahor-molokai
 
 set encoding=utf8
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -123,8 +148,9 @@ set si "Smart indet
 " auto tab after brackets
 set cindent shiftwidth=8
 
-" line numbers
-set nu
+" Relative lines number
+set relativenumber
+
 " Tab width
 set shiftwidth=8
 
@@ -143,10 +169,27 @@ set laststatus=2
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" better regexp handling
+nnoremap / /\v
+vnoremap / /\v
+
+" Removing highlighting after a search
+nnoremap <leader><space> :noh<cr>
+
+" Using tab instead of % for pairing movements
+nnoremap <tab> %
+vnoremap <tab> %
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Utils
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Esc key is far ... 
+inoremap jj <ESC>
+
+" automatic save on lost focus
+au FocusLost * :wa
+
 set ffs=unix,dos,mac "Default file types
 
 " new tab
@@ -171,14 +214,9 @@ map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 
+" so you can use undo even after closing a file
+set undofile
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call pathogen#runtime_append_all_bundles()
-
-" Prevents LustyExplorer from whining when vim not compiled with ruby support
-let g:LustyExplorerSuppressRubyWarning = 1
-
-" Snipmate does need this
-filetype plugin on
