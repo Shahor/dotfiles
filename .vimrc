@@ -135,7 +135,8 @@ if has("gui_running")
 endif
 
 set t_Co=256 " On MAC OS one must use iTerm2 in order to be able to use 256 colors. Terminal.app just doesn't handle it
-colorscheme shahor-molokai
+"colorscheme shahor-molokai
+colorscheme prouget.molokai
 
 set encoding=utf8
 
@@ -219,4 +220,10 @@ set undofile
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
