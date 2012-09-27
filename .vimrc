@@ -1,229 +1,254 @@
-" Some parts of this .vimrc file come from http://amix.dk/vim/vimrc.html
-" others from this awesome post : http://stevelosh.com/blog/2010/09/coming-home-to-vim/
-" 	(his .vimrc here : https://bitbucket.org/sjl/dotfiles/src/tip/vim/.vimrc)
 
-" Preamble ----------------------------------------------------------------
-" {{{
+call pathogen#infect()
+set nocompatible              " Don't be compatible with vi
 
-filetype off
-call pathogen#runtime_append_all_bundles()
-filetype plugin indent on
-set nocompatible
+syntax on                     " syntax highlighing
+filetype on                   " try to detect filetypes
+filetype plugin indent on     " enable loading indent file for filetype
+set omnifunc=syntaxcomplete#Complete
 
-" }}}
+" Line numbers
+set number                    " Display line numbers
+set numberwidth=1             " using only 1 column (and 1 space) while possible
+:autocmd InsertLeave * :set relativenumber
+:autocmd InsertEnter * :set number
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Sets how many lines of history VIM has to remember
-set history=700
+set background=dark           " We are using dark background in vim
+set title                     " show title in console title bar
+set wildmenu                  " Menu completion in command mode on <Tab>
+set wildmode=full             " <Tab> cycles between all matching choices.
+set t_Co=256
+colorscheme tomorrow-night
 
-" Buffers
-set hidden
+" don't bell or blink
+set noerrorbells
+set vb t_vb=
 
-" Set to auto read when a file is changed from the outside
-set autoread
+" Undo available even after file close
+set undofile
 
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
+" Ignore these files when completing
+set wildignore+=*.o,*.obj,.git,*.pyc
+set grepprg=ack-grep          " replace the default grep program with ack
 
-" Fast saving
-nmap <leader>w :w!<cr>
+""" Insert completion
+" don't select first item, follow typing in autocomplete
+set completeopt=menuone,longest,preview
+set pumheight=6             " Keep a small completion window
 
-" Buffers listing
-nmap <leader>l :ls<cr>
+""" Moving Around/Editing
+set cursorline              " have a line indicate the cursor location
+set ruler                   " show the cursor position all the time
+set nostartofline           " Avoid moving cursor to BOL when jumping around
+set virtualedit=block       " Let cursor move past the last char in <C-v> mode
+set scrolloff=3             " Keep 3 context lines above and below the cursor
+set backspace=2             " Allow backspacing over autoindent, EOL, and BOL
+set showmatch               " Briefly jump to a paren once it's balanced
+set wrap                  " don't wrap text
+set linebreak               " don't wrap textin the middle of a word
+set autoindent              " always set autoindenting on
+set smartindent             " use smart indent if there is no indent file
+set tabstop=4               " <tab> inserts 4 spaces
+set shiftwidth=4            " but an indent level is 2 spaces wide.
+set softtabstop=4           " <BS> over an autoindent deletes both spaces.
+set expandtab               " Use spaces, not tabs, for autoindent/tab key.
+set shiftround              " rounds indent to a multiple of shiftwidth
+set matchpairs+=<:>         " show matching <> (html mainly) as well
+set foldmethod=indent       " allow us to fold on indents
+set foldlevel=99            " don't fold by default
+set hidden     " The current buffer can be put to the background without writing to disk
+set history=1000
 
-" Fast editing of the .vimrc
-map <leader>e :e! $MYVIMRC<cr>
+"""" Reading/Writing
+set noautowrite             " Never write a file unless I request it.
+set noautowriteall          " NEVER.
+set noautoread              " Don't automatically re-read changed files.
+set modeline                " Allow vim options to be embedded in files;
+set modelines=5             " they must be within the first or last 5 lines.
+set ffs=unix,dos,mac        " Try recognizing dos, unix, and mac line endings.
 
-" When vimrc is edited, reload it
-autocmd! bufwritepost vimrc source ~/.vim_runtime/vimrc
+"""" Messages, Info, Status
+set ls=2                    " allways show status line
+set vb t_vb=                " Disable all bells.  I hate ringing/flashing.
+set confirm                 " Y-N-C prompt if closing with unsaved changes.
+set showcmd                 " Show incomplete normal mode commands as I type.
+set report=0                " : commands always print changed line count.
+set shortmess+=a            " Use [+]/[RO]/[w] for modified/readonly/written.
+set laststatus=2            " Always show statusline, even if only 1 window.
+set statusline=%<%{fugitive#statusline()}\ %F\ %M%R%H%=%{&ff}%Y,%{&fenc}\ \|\ %l/%L:%v\ %P\
+set colorcolumn=80
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => VIM user interface
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" displays tabs with :set list & displays when a line runs off-screen
+" set listchars=tab:⋮\ ,trail:•,precedes:<,extends:>
+set list
 
-" removing use of arrow keys
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
-nnoremap j gj
-nnoremap k gk
+""" Searching and Patterns
+set ignorecase              " Default to using case insensitive searches,
+set smartcase               " unless uppercase letters are used in the regex.
+set smarttab                " Handle tabs more intelligently
+set hlsearch                " Highlight searches by default.
+set incsearch               " Incrementally search while typing a /regex
 
-set ttyfast
+set backupdir=~/.vim/tmp
+set directory=~/.vim/tmp
 
-" Terminal title is actual opened file name
-set title
+let g:ctrlp_by_filename = 1
+let g:ctrlp_max_height = 20
+let g:ctrlp_prompt_mappings = {
+  \ 'PrtBS()':      ['<bs>', '<c-]>', '<c-h>'],
+  \ 'PrtCurLeft()': ['<left>', '<c-^>'],
+  \ 'ToggleType(1)': ['<c-f>', '<c-up>', '<F1>'],
+  \ }
+let g:ctrlp_max_files = 0
+" Want to use git instead to list files ?
+" let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files']
 
-" colors
-syntax on
-
-" cursor position info
-set ruler
-
-" 85 column marker
-set colorcolumn=85
-
-" case insensitive search
-set ignorecase
-set smartcase
-
-" Smart autocompletion on file opening (using :e per exemple)
-set wildmode=longest,list
-
-" performing search while typing
-set incsearch
-set hlsearch " Highlights search things
-
-" removes all the vi compatibility
-set nocompatible
-
-" Smarter status line
-hi StatColor guibg=#95e454 guifg=black ctermbg=lightgreen ctermfg=black
-hi Modified guibg=orange guifg=black ctermbg=lightred ctermfg=black
-
-function! MyStatusLine(mode)
-	let statusline=""
-	if a:mode == 'Enter'
-		let statusline.="%#StatColor#"
-	endif
-	let statusline.="\(%n\)\ %f\ "
-	if a:mode == 'Enter'
-		let statusline.="%*"
-	endif
-	let statusline.="%#Modified#%m"
-	if a:mode == 'Leave'
-		let statusline.="%*%r"
-	elseif a:mode == 'Enter'
-		let statusline.="%r%*"
-	endif
-	let statusline .= "\ (%l/%L,\ %c)\ %P%=%h%w\ %y\ [%{&encoding}:%{&fileformat}]\ \ "
-	return statusline
+" Restore cursor position on opening a file
+function! ResCur()
+    if line("'\"") <= line("$")
+        normal! g`"
+        return 1
+    endif
 endfunction
 
-au WinEnter * setlocal statusline=%!MyStatusLine('Enter')
-au WinLeave * setlocal statusline=%!MyStatusLine('Leave')
-set statusline=%!MyStatusLine('Enter')
+augroup resCur
+    autocmd!
+    autocmd BufWinEnter * call ResCur()
+augroup END
 
-function! InsertStatuslineColor(mode)
-	if a:mode == 'i'
-		hi StatColor guibg=orange ctermbg=lightred
-	elseif a:mode == 'r'
-		hi StatColor guibg=#e454ba ctermbg=magenta
-	elseif a:mode == 'v'
-		hi StatColor guibg=#e454ba ctermbg=magenta
-	else
-		hi StatColor guibg=red ctermbg=red
-	endif
-endfunction
+" close preview window automatically when we move around
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
-au InsertEnter * call InsertStatuslineColor(v:insertmode)
-au InsertLeave * hi StatColor guibg=#95e454 guifg=black ctermbg=lightgreen ctermfg=black
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Colors and fonts
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has("gui_running")
-	set guioptions-=T
-endif
-
-set t_Co=256 " On MAC OS one must use iTerm2 in order to be able to use 256 colors. Terminal.app just doesn't handle it
-"colorscheme shahor-molokai
-colorscheme prouget.molokai
-
-set encoding=utf8
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set ai "Auto indent
-set si "Smart indet
-
-" auto tab after brackets
-set cindent shiftwidth=8
-
-" Relative lines number
-set relativenumber
-
-" Tab width
-set shiftwidth=8
-
-set nowrap
-
-set showmatch " Show matching bracets when text indicator is over them
-set mat=2 "How many tenths of a second to blink
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Statusline
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Always show the statusline
-set laststatus=2
+" Smart cursorline
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Editing mappings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" better regexp handling
-nnoremap / /\v
-vnoremap / /\v
+" Match html tags the same way than () {} (among other)
+runtime macros/matchit.vim
 
-" Removing highlighting after a search
-nnoremap <leader><space> :noh<cr>
+let mapleader=","             " change the leader to be a comma vs slash
 
-" Using tab instead of % for pairing movements
-nnoremap <tab> %
-vnoremap <tab> %
+" Set working directory
+nnoremap <leader>. :lcd %:p:h<CR>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Utils
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" sudo write this
+cnoremap W! w !sudo tee % >/dev/null
 
-" Esc key is far ... 
-inoremap jj <ESC>
+" ctrl-jklm  changes to that split
+noremap <c-j> <c-w>j
+noremap <c-k> <c-w>k
+noremap <c-l> <c-w>l
+noremap <c-h> <c-w>h
+noremap <c-left> <c-w>j
+noremap <c-down> <c-w>k
+noremap <c-up> <c-w>l
+noremap <c-right> <c-w>h
 
-" automatic save on lost focus
-au FocusLost * :wa
+" Removing use of arrow keys
 
-set ffs=unix,dos,mac "Default file types
+" and lets make these all work in insert mode too ( <C-O> makes next cmd
+"  happen as if in command mode )
+inoremap <C-W> <C-O><C-W>
 
-" new tab
-map	<F4> :tabedit 
-map!	<F4> :tabedit 
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
+
+" don't outdent hashes
+inoremap # #
+
+
+"inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+"inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+
+" ACP related stuff. Deactivate for now.
+" Don't allow snipmate to take over tab
+"autocmd VimEnter * ino <c-j> <c-r>=TriggerSnippet()<cr>
+" Use tab to scroll through autocomplete menus
+"autocmd VimEnter * imap <expr> <Tab> pumvisible() ? "<C-N>" : "<Tab>"
+"autocmd VimEnter * imap <expr> <S-Tab> pumvisible() ? "<C-P>" : "<S-Tab>"
+"snor <c-j> <esc>i<right><c-r>=TriggerSnippet()<cr>
+"let g:acp_completeoptPreview=1
+" Select the item in the list with enter
+"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+
+let g:statusLineText=""
+noremap <F5> :bN<CR>
+noremap <F6> :bn<CR>
+inoremap <F5> <esc>:bN<cr>
+inoremap <F6> <esc>:bn<cr>
+
+" Smarter home key
+noremap <Home> ^
+noremap ^ <Home>
+inoremap <Home> <C-O>^
+
+" Quick diff between buffer and file
+nnoremap <Leader>d :w !diff % -<CR>
+nnoremap <Leader>w :w <CR>
+" Clear search (highlights)
+nnoremap <silent> <Leader><space> :let @/ = ""<Return>
+nnoremap <silent> <Leader>s ms:%s/\s\s*$//g<Return>'szz
+
+" Move current line up and down
+nnoremap - ddp
+nnoremap _ ddkP
+
+" Open file
+noremap <F1> :CtrlP<cr>
+inoremap <F1> <C-o>:CtrlP<cr>
+noremap <F2> :CtrlPBuffer<cr>
+inoremap <F2> <C-o>:CtrlPBuffer<cr>
+
+" Clipboard
+" nnoremap <C-F3>   "+yy
+" vnoremap <C-F3>   "+y
+" noremap  <C-F4>   "+gp
+" inoremap <C-F3>   <c-o>"+yy
+" inoremap <C-F4>   <c-o>"+gp
+
+" Primary selection
+" nnoremap <F3> "*yy
+" vnoremap <F3> "*y
+" noremap  <F4> "*gp
+" inoremap <F3> <c-o>"*yy
+" inoremap <F4> <c-o>"*gp
+
+" Usefull for working on themes
+function! SynStack()
+    echo join(map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")'), " > ")
+endfunc
+nnoremap <C-s> :call SynStack()<CR>
+
+" Focus on current scope
+nnoremap <leader>z zMzvzczOzz
+
+"nnoremap <silent><C-o> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
+"nnoremap <silent><C-S-o> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
+nnoremap <silent><C-o>   :set paste<CR>m`o<Esc>``:set nopaste<CR>
+"nnoremap <silent><C-O> :set paste<CR>m`O<Esc>``:set nopaste<CR>
+
+inoremap jj <Esc>
+
+" Surround comments with character /
+let g:surround_47 = "/* \r */"
+
+
+
+""" FocusMode
+let g:vimroom_width = &colorcolumn - 1
+function! ToggleFocusMode()
+    set noruler
+    set nolist
+    VimroomToggle
+endfunc
+nnoremap <F3> :call ToggleFocusMode()<cr>
+
 
 " Sets highlight for wanted matches
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
-" Saves file deleting trailing whitespaces
-map <F2> :%s/\s\+$//:w
-map! <F2> <ESC> :%s/\s\+$//:w
-
-" Alternates case
-map <F3> g~w
-map! <F3> <ESC> g~w
-
-" Navigating through splitted windows
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
-
-" so you can use undo even after closing a file
-set undofile
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugins
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Misc
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <C-d> :%s/\s\+$//
