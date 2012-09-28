@@ -76,7 +76,7 @@ set report=0                " : commands always print changed line count.
 set shortmess+=a            " Use [+]/[RO]/[w] for modified/readonly/written.
 set laststatus=2            " Always show statusline, even if only 1 window.
 set statusline=%<%{fugitive#statusline()}\ %F\ %M%R%H%=%{&ff}%Y,%{&fenc}\ \|\ %l/%L:%v\ %P\
-set colorcolumn=80
+set colorcolumn=200
 
 " displays tabs with :set list & displays when a line runs off-screen
 " set listchars=tab:⋮\ ,trail:•,precedes:<,extends:>
@@ -250,5 +250,4 @@ nnoremap <F3> :call ToggleFocusMode()<cr>
 " Sets highlight for wanted matches
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
-
 map <C-d> :%s/\s\+$//
