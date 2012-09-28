@@ -89,6 +89,7 @@ set smarttab                " Handle tabs more intelligently
 set hlsearch                " Highlight searches by default.
 set incsearch               " Incrementally search while typing a /regex
 
+set backupcopy=yes
 set backupdir=~/.vim/tmp
 set directory=~/.vim/tmp
 
@@ -100,6 +101,7 @@ let g:ctrlp_prompt_mappings = {
   \ 'ToggleType(1)': ['<c-f>', '<c-up>', '<F1>'],
   \ }
 let g:ctrlp_max_files = 0
+let g:ctrlp_mruf_max = 10000
 " Want to use git instead to list files ?
 " let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files']
 
@@ -197,8 +199,8 @@ nnoremap - ddp
 nnoremap _ ddkP
 
 " Open file
-noremap <F1> :CtrlP<cr>
-inoremap <F1> <C-o>:CtrlP<cr>
+noremap <F1> :CtrlPMixed<cr>
+inoremap <F1> <C-o>   :CtrlPMixed<cr>
 noremap <F2> :CtrlPBuffer<cr>
 inoremap <F2> <C-o>:CtrlPBuffer<cr>
 

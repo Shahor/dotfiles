@@ -121,6 +121,7 @@ repo snipmate-snippets https://github.com/honza/snipmate-snippets.git
 
 
 sym pathogen/autoload/pathogen.vim autoload
+sym align
 sym ctrlp
 sym fugitive
 sym surround
