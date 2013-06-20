@@ -78,10 +78,6 @@ set laststatus=2            " Always show statusline, even if only 1 window.
 set statusline=%<%{fugitive#statusline()}\ %F\ %M%R%H%=%{&ff}%Y,%{&fenc}\ \|\ %l/%L:%v\ %P\
 set colorcolumn=200
 
-" displays tabs with :set list & displays when a line runs off-screen
-" set listchars=tab:⋮\ ,trail:•,precedes:<,extends:>
-set list
-
 """ Searching and Patterns
 set ignorecase              " Default to using case insensitive searches,
 set smartcase               " unless uppercase letters are used in the regex.
@@ -240,7 +236,7 @@ let g:surround_47 = "/* \r */"
 
 
 """ FocusMode
-let g:vimroom_width = &colorcolumn - 1
+let g:vimroom_width = &colorcolumn - 2
 function! ToggleFocusMode()
     set noruler
     set nolist

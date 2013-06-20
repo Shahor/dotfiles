@@ -1,6 +1,7 @@
 [alias]
-	st = status
+    st = status
 	co = checkout
+	go = checkout
 	ci = commit
 	br = branch
 
@@ -12,7 +13,7 @@
 	hista = log --graph --pretty=format:'%Cred%h%Creset - %C(bold blue)<%an>%Creset%C(yellow)%d%Creset %s %Cgreen(%cr) ' --abbrev-commit --all --
 
 [user]
-	name = Shahor
+	name = Alexandre Gaudencio
 	email = shahor@shahor.fr
 [color]
 	ui = auto
@@ -37,5 +38,6 @@
 [core]
 	editor = /usr/bin/vim
 	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	commentchar = ";"
 [merge]
 	tool = kdiff3
