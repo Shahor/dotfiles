@@ -8,12 +8,11 @@
 	l = log --all --graph
 	ls = ls-files
 	lg = log -p
-#	lgv = log -p -40 | vim - -R -c 'set foldmethod=syntax'
 	hist = log --graph --pretty=format:'%Cred%h%Creset - %C(bold blue)<%an>%Creset%C(yellow)%d%Creset %s %Cgreen(%cr) ' --abbrev-commit --
 	hista = log --graph --pretty=format:'%Cred%h%Creset - %C(bold blue)<%an>%Creset%C(yellow)%d%Creset %s %Cgreen(%cr) ' --abbrev-commit --all --
 
 [user]
-	name = Alexandre Gaudencio
+	name = Shahor
 	email = shahor@shahor.fr
 [color]
 	ui = auto
@@ -40,4 +39,10 @@
 	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	commentchar = ";"
 [merge]
-	tool = kdiff3
+    tool = opendiff
+[push]
+    default = simple
+[rerere]
+    enabled = false
+[log]
+    date = local
