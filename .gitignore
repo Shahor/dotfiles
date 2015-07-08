@@ -4,3 +4,13 @@
 *.swp
 .*~
 *~
+.DS_Store
+*REMOTE*
+*BACKUP*
+*BASE*
+*LOCAL*
+Guardfile
+*.patch
+*.old
+*.bak
+*.orig
